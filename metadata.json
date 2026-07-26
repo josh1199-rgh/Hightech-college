@@ -1,0 +1,8 @@
+{
+  "name": "Remix: High-Tech College",
+  "description": "Modern High-Tech College website featuring glassmorphism floating navigation, full-screen hero section, admissions badge, statistics, and smooth scrolling sections.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>High-Tech College Home Preview</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, "Plus Jakarta Sans", system-ui, sans-serif;
+        color: #fff;
+        background: #0f172a;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 7rem clamp(1rem, 4vw, 3rem) 3rem;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("./src/assets/images/home-page-background.jpg");
+        background-size: cover;
+        background-position: center;
+        filter: brightness(1.05) contrast(1.05);
+        transform: scale(1.02);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(15, 23, 42, 0.68), rgba(15, 23, 42, 0.24), transparent),
+          linear-gradient(0deg, rgba(15, 23, 42, 0.55), transparent 45%, rgba(15, 23, 42, 0.12));
+      }
+
+      .nav {
+        position: absolute;
+        z-index: 2;
+        inset: 1rem clamp(1rem, 4vw, 3rem) auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(15, 23, 42, 0.66);
+        backdrop-filter: blur(18px);
+        border-radius: 999px;
+      }
+
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .apply {
+        border: 0;
+        border-radius: 999px;
+        padding: 0.75rem 1rem;
+        color: white;
+        background: #dc2626;
+        font-weight: 800;
+      }
+
+      .content {
+        position: relative;
+        z-index: 1;
+        width: min(100%, 80rem);
+        margin: auto;
+      }
+
+      h1 {
+        max-width: 58rem;
+        margin: 0;
+        line-height: 1.08;
+        letter-spacing: 0;
+        text-shadow: 0 4px 18px rgba(0, 0, 0, 0.78);
+      }
+
+      .line-one {
+        display: block;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        font-weight: 400;
+        color: #f1f5f9;
+      }
+
+      .line-two {
+        display: block;
+        margin-top: 0.25rem;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(3.2rem, 7vw, 6rem);
+        font-style: italic;
+        font-weight: 900;
+        color: #fff;
+      }
+
+      p {
+        max-width: 42rem;
+        margin: 1.5rem 0 0;
+        font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+        line-height: 1.6;
+        color: #f8fafc;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.82);
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-top: 2rem;
+        padding: 1rem 1.6rem;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #dc2626, #ef4444, #e11d48);
+        color: white;
+        font-weight: 900;
+        text-decoration: none;
+        box-shadow: 0 22px 42px rgba(127, 29, 29, 0.42);
+      }
+
+      .learn {
+        position: relative;
+        z-index: 1;
+        align-self: flex-end;
+        width: clamp(7rem, 11vw, 8rem);
+        aspect-ratio: 1;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        font-weight: 900;
+        background: #dc2626;
+        border: 4px solid rgba(15, 23, 42, 0.8);
+        box-shadow: 0 24px 50px rgba(15, 23, 42, 0.62);
+      }
+
+      @media (max-width: 640px) {
+        .hero {
+          padding-top: 6.25rem;
+          padding-bottom: 2rem;
+        }
+
+        .nav {
+          border-radius: 1.5rem;
+        }
+
+        .apply {
+          padding: 0.65rem 0.8rem;
+        }
+
+        .cta {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="hero">
+      <nav class="nav" aria-label="Preview navigation">
+        <div class="brand">High-Tech College</div>
+        <button class="apply">Apply Now</button>
+      </nav>
+
+      <section class="content" aria-labelledby="preview-title">
+        <h1 id="preview-title">
+          <span class="line-one">Shape Your Future at</span>
+          <span class="line-two">High-Tech College</span>
+        </h1>
+        <p>Professional Skills. Practical Training. Career Success.</p>
+        <a class="cta" href="./index.html">Explore Courses -></a>
+      </section>
+
+      <div class="learn">Learn More</div>
+    </main>
+  </body>
+</html>
