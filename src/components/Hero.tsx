@@ -36,7 +36,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCourses, onApplyClick }) =>
 
   const cmsHeroImage = settings.siteImages?.heroImage;
   const heroImageSrc =
-    cmsHeroImage && !cmsHeroImage.includes('/src/assets/images/')
+    cmsHeroImage && cmsHeroImage.trim() !== ''
       ? cmsHeroImage
       : homePageBackground;
 

@@ -79,6 +79,40 @@ const STORAGE_KEYS = {
   AUTH: 'htc_cms_authenticated_v5',
 };
 
+const CMS_STORAGE_RESET_MARKER = 'htc_cms_storage_reset_2026_07_30';
+const LEGACY_STORAGE_KEYS = [
+  'htc_cms_courses_v3',
+  'htc_cms_courses_v2',
+  'htc_cms_faqs_v5',
+  'htc_cms_faqs_v4',
+  'htc_cms_campus_life_v3',
+  'htc_cms_campus_life_v2',
+  'htc_cms_stats_v3',
+  'htc_cms_stats_v2',
+  'htc_cms_applications_v3',
+  'htc_cms_applications_v2',
+  'htc_cms_messages_v3',
+  'htc_cms_messages_v2',
+  'htc_cms_settings_v4',
+  'htc_cms_settings_v3',
+  'htc_cms_authenticated_v3',
+  'htc_cms_authenticated_v2',
+];
+
+const clearSavedCMSDataOnce = () => {
+  try {
+    if (typeof window === 'undefined') return;
+    if (localStorage.getItem(CMS_STORAGE_RESET_MARKER) === 'done') return;
+
+    [...Object.values(STORAGE_KEYS), ...LEGACY_STORAGE_KEYS].forEach((key) => {
+      localStorage.removeItem(key);
+    });
+    localStorage.setItem(CMS_STORAGE_RESET_MARKER, 'done');
+  } catch (e) {
+    console.error('Failed clearing saved CMS data', e);
+  }
+};
+
 // Storage keys with backward compatibility fallback
 const getStoredItem = (keyV4: string, keyV3: string, keyV2?: string) => {
   try {
@@ -107,6 +141,8 @@ const sanitizeSiteImages = (stored: Partial<SiteImages> = {}): SiteImages => {
 };
 
 export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  clearSavedCMSDataOnce();
+
   const [isCMSOpen, setIsCMSOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
     try {

@@ -177,6 +177,25 @@ export const ImageSettingsPanel: React.FC<ImageSettingsPanelProps> = ({
               </div>
               <div className="flex items-center gap-2">
                 <button
+                  onClick={() => {
+                    const siteImages = settings.siteImages || {};
+                    Object.entries(siteImages).forEach(([key, value]) => {
+                      if (value && typeof value === 'string' && value.startsWith('data:')) {
+                        downloadBase64(value, `site-${key}.${getExtension(value)}`);
+                      }
+                    });
+                    courses.forEach((course) => {
+                      if (course.image && course.image.startsWith('data:')) {
+                        downloadBase64(course.image, `course-${course.id}.${getExtension(course.image)}`);
+                      }
+                    });
+                  }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-medium transition-colors"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download All Images
+                </button>
+                <button
                   onClick={() => setShowExport(true)}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-medium transition-colors"
                 >
@@ -233,14 +252,23 @@ export const ImageSettingsPanel: React.FC<ImageSettingsPanelProps> = ({
                           <h4 className="text-sm font-bold text-white">{slot.label}</h4>
                           <p className="text-xs text-slate-500">{slot.description}</p>
                         </div>
-                        {currentImage && (
+                      {currentImage && (
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => downloadBase64(currentImage, `${slot.key}.${getExtension(currentImage)}`)}
+                            className="text-xs text-slate-500 hover:text-red-400 transition-colors flex items-center gap-1"
+                          >
+                            <Download className="w-3 h-3" />
+                            Download
+                          </button>
                           <button
                             onClick={() => handleClearImage(slot.key)}
                             className="text-xs text-slate-500 hover:text-red-400 transition-colors"
                           >
                             Clear
                           </button>
-                        )}
+                        </div>
+                      )}
                       </div>
                       <div className="w-full h-32 bg-slate-800 rounded-lg overflow-hidden border border-white/5 flex items-center justify-center">
                         {currentImage ? (
@@ -342,12 +370,21 @@ const CourseImageSlot: React.FC<CourseImageSlotProps> = ({
           <p className="text-xs text-slate-500">{course.category}</p>
         </div>
         {preview && (
-          <button
-            onClick={() => onClear(course.id)}
-            className="text-xs text-slate-500 hover:text-red-400 transition-colors"
-          >
-            Clear
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => downloadBase64(preview, `course-${course.id}.${getExtension(preview)}`)}
+              className="text-xs text-slate-500 hover:text-red-400 transition-colors flex items-center gap-1"
+            >
+              <Download className="w-3 h-3" />
+              Download
+            </button>
+            <button
+              onClick={() => onClear(course.id)}
+              className="text-xs text-slate-500 hover:text-red-400 transition-colors"
+            >
+              Clear
+            </button>
+          </div>
         )}
       </div>
       <div className="w-full h-32 bg-slate-800 rounded-lg overflow-hidden border border-white/5 flex items-center justify-center">
