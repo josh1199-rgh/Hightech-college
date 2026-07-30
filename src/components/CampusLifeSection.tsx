@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useCMS } from '../context/CMSContext';
 import { DEFAULT_SITE_IMAGES } from '../data/collegeData';
+
+const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 import {
   Monitor,
   Utensils,
@@ -42,7 +44,7 @@ const sectionVariant = {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.9, ease: cubicEase as [number, number, number, number] },
   },
 };
 
@@ -211,7 +213,7 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              whileHover={{ y: -12, rotateX: -2, rotateY: 3, shadow: '0 25px 50px -12px rgba(0, 0, 0, 0.12)' }}
+              whileHover={{ y: -12, rotateX: -2, rotateY: 3, filter: 'drop-shadow(0 25px 50px -12px rgba(0, 0, 0, 0.12))' }}
               className="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl overflow-hidden shadow-sm transition-all duration-400 flex flex-col group cursor-pointer"
             >
               {/* Photo */}
@@ -264,7 +266,8 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
 
             {/* Right Side Photo Collage (Cascading stagger entry) */}
             <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              
+const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
               {galleryPhotos.map((photo, i) => (
                 <motion.div
                   key={photo.id}

@@ -120,7 +120,7 @@ export const ImageSettingsPanel: React.FC<ImageSettingsPanelProps> = ({
   };
 
   const generateExport = () => {
-    const siteImages = settings.siteImages || {};
+    const siteImages = (settings.siteImages || imageDefaults) as SiteImages;
     const exportLines = [
       `export const DEFAULT_SITE_IMAGES: SiteImages = {`,
       `  heroImage: '${(siteImages.heroImage || imageDefaults.heroImage).replace(/'/g, "\\'")}',`,
@@ -210,7 +210,7 @@ export const ImageSettingsPanel: React.FC<ImageSettingsPanelProps> = ({
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => {
-                    const siteImages = settings.siteImages || {};
+  const siteImages: SiteImages = settings.siteImages || imageDefaults;
                     Object.entries(siteImages).forEach(([key, value]) => {
                       if (value && typeof value === 'string' && value.startsWith('data:')) {
                         downloadBase64(value, `site-${key}.${getExtension(value)}`);

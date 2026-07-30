@@ -69,7 +69,6 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
       kcseGrade,
       intakePeriod,
       message: message.trim() || 'Applied via website course modal',
-      status: 'Pending',
     });
 
     setSubmitted(true);

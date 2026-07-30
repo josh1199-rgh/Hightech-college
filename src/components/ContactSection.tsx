@@ -15,6 +15,8 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { useCMS } from '../context/CMSContext';
 
+const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 interface ContactSectionProps {
   initialProgram?: string;
 }
@@ -25,7 +27,7 @@ const sectionVariant = {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.9, ease: cubicEase as [number, number, number, number] },
   },
 };
 
@@ -267,7 +269,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
             {/* CARD 1: HOTLINE */}
             <motion.a
               href={`tel:${settings.hotlinePhone}`}
-              whileHover={{ y: -4, shadow: '0 10px 25px -5px rgba(0,0,0,0.08)' }}
+              whileHover={{ y: -4, filter: 'drop-shadow(0 10px 25px -5px rgba(0,0,0,0.08))' }}
               className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-100 transition-all flex items-center justify-between gap-5 cursor-pointer block"
             >
                  <div className="flex items-center gap-5">
@@ -299,7 +301,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
               href={`https://wa.me/${settings.whatsappPhone.replace(/[^0-9]/g, '').replace(/^0/, '254')}`}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ y: -4, shadow: '0 10px 25px -5px rgba(0,0,0,0.08)' }}
+              whileHover={{ y: -4, filter: 'drop-shadow(0 10px 25px -5px rgba(0,0,0,0.08))' }}
               className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-100 transition-all flex items-center gap-5 cursor-pointer block"
             >
               {/* Green Circle WhatsApp Icon */}
