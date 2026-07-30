@@ -1,0 +1,153 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DATABASE_DIRECT_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex", "nestedFilters"]
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  fullName      String
+  role          Role      @default(STUDENT)
+  active        Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  applications  StudentApplication[]
+  campusLife    StudentLifeHighlight[]
+  messages      ContactMessage[]
+}
+
+enum Role {
+  STUDENT
+  PARENT
+  TEACHER
+  ADMIN
+}
+
+model Course {
+  id          String   @id @default(uuid())
+  title       String
+  categoryId  String
+  category    CourseCategory @relation(fields: [categoryId], references: [id])
+  duration    String
+  level       String
+  format      String
+  description String
+  skills      String[]
+  nextCohort  String
+  tuition     String
+  rating      Float    @default(0)
+  featured    Boolean  @default(false)
+  image       String
+  examBody    String
+  location    String
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  applications StudentApplication[]
+  @@index([categoryId])
+  @@index([active, featured])
+  @@index([title])
+  @@index([nextCohort])
+}
+
+model CourseCategory {
+  id   String  @id @default(uuid())
+  name String  @unique
+  slug String  @unique
+  description String?
+  courses  Course[]
+}
+
+model StudentApplication {
+  id           String   @id @default(uuid())
+  applicantName String
+  email        String
+  phone        String
+  program      String
+  kcseGrade    String?
+  intakePeriod String
+  message      String?
+  notes        String?
+  status       ApplicationStatus @default(Pending)
+  statusNotes  String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  course       Course   @relation(fields: [courseId], references: [id])
+  courseId     String
+  @@index([status])
+  @@index([createdAt])
+  @@index([courseId])
+  @@index([applicantName])
+}
+
+enum ApplicationStatus {
+  Pending
+  UnderReview
+  Approved
+  Enrolled
+  Rejected
+}
+
+model ContactMessage {
+  id         String   @id @default(uuid())
+  name       String
+  email      String
+  phone      String
+  subject    String
+  message    String
+  status     MessageStatus @default(Unread)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum MessageStatus {
+  Unread
+  Read
+  Replied
+}
+
+model StudentLifeHighlight {
+  id          String   @id @default(uuid())
+  title       String
+  category    String
+  image       String
+  description String
+  tag         String
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([category])
+}
+
+model SiteSettings {
+  id              String @id @default(uuid())
+  announcementBanner String?
+  announcementActive Boolean @default(true)
+  hotlinePhone     String?
+  whatsappPhone   String?
+  campusLocation  String?
+  updatedAt       DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  action    String
+  entity    String
+  entityId  String?
+  userId    String?
+  metadata  Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  @@index([action])
+  @@index([createdAt])
+}

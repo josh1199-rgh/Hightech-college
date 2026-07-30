@@ -1,0 +1,303 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hightech-college-app
+  namespace: production
+  labels:
+    app: hightech-college
+    version: "1.0.0"
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: hightech-college
+  template:
+    metadata:
+      labels:
+        app: hightech-college
+        version: "1.0.0"
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - hightech-college
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: app
+          image: hightech-college/api:latest
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "3000"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: hightech-secrets
+                  key: database-url
+            - name: DATABASE_DIRECT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: hightech-secrets
+                  key: database-direct-url
+            - name: REDIS_URL
+              value: "redis://hightech-redis:6379/0"
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: hightech-secrets
+                  key: jwt-secret
+            - name: LOG_LEVEL
+              value: "info"
+            - name: ENABLE_HMR
+              value: "false"
+            - name: DISABLE_HMR
+              value: "true"
+          resources:
+            requests:
+              cpu: 250m
+              memory: "256Mi"
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health/deep
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 30
+          volumeMounts:
+            - name: logs
+              mountPath: /app/logs
+              readOnly: false
+            - name: uploads
+              mountPath: /tmp/uploads
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: logs
+          persistentVolumeClaim:
+            claimName: app-logs-pvc
+        - name: uploads
+          emptyDir: {}
+        - name: tmp
+          emptyDir:
+            sizeLimit: "512Mi"
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
+        readOnlyRootFilesystem: true
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hightech-college-nginx
+  namespace: production
+  labels:
+    app: hightech-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hightech-nginx
+  template:
+    metadata:
+      labels:
+        app: hightech-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25-alpine
+          ports:
+            - containerPort: 80
+              protocol: TCP
+            - containerPort: 443
+              protocol: TCP
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+              readOnly: true
+            - name: nginx-cache
+              mountPath: /var/cache/nginx
+            - name: nginx-logs
+              mountPath: /var/log/nginx
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: hightech-nginx-config
+        - name: nginx-cache
+          emptyDir: {}
+        - name: nginx-logs
+          emptyDir: {}
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hightech-college-service
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: hightech-college-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hightech-nginx-service
+  namespace: production
+  annotations:
+    cloud.google.com/load-balancer-type: "External"
+spec:
+  type: LoadBalancer
+  selector:
+    app: hightech-nginx
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
+    - name: https
+      port: 443
+      targetPort: 443
+      protocol: TCP
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hightech-college-hpa
+  namespace: production
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hightech-college-app
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+    - type: Pods
+      pods:
+        metric:
+          name: http_requests_per_second
+        target:
+          type: AverageValue
+          averageValue: "100"
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: hightech-college-pdb
+  namespace: production
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: hightech-college
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hightech-nginx-config
+  namespace: production
+  labels:
+    app: hightech-nginx
+data:
+  nginx.conf: |
+    worker_processes auto;
+    events {
+      worker_connections 4096;
+      use epoll;
+      multi_accept on;
+    }
+    http {
+      gzip on;
+      gzip_comp_level 6;
+      keepalive_timeout 65;
+      server_tokens off;
+      upstream app_backend {
+        server hightech-college-app:3000;
+      }
+    }
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-logs-pvc
+  namespace: production
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hightech-secrets
+  namespace: production
+type: Opaque
+data:
+  database-url: ""
+  database-direct-url: ""
+  jwt-secret: ""
+  redis-password: ""
