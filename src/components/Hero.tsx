@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { ArrowRight, ArrowDownRight } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useCMS } from '../context/CMSContext';
-import homePageBackground from '../assets/images/home-page-background.jpg';
 
 interface HeroProps {
   onExploreCourses: () => void;
@@ -35,10 +34,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCourses, onApplyClick }) =>
   };
 
   const cmsHeroImage = settings.siteImages?.heroImage;
-  const heroImageSrc =
-    cmsHeroImage && cmsHeroImage.trim() !== ''
-      ? cmsHeroImage
-      : homePageBackground;
+  const heroImageSrc = cmsHeroImage && cmsHeroImage.trim() !== '' ? cmsHeroImage : '';
 
   return (
     <section
