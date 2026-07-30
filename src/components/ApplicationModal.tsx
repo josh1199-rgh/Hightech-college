@@ -19,6 +19,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   const { addApplication } = useCMS();
   const [showApplicationForm, setShowApplicationForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [applicantName, setApplicantName] = useState('');
   const [email, setEmail] = useState('');
@@ -26,12 +27,39 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   const [kcseGrade, setKcseGrade] = useState('C+');
   const [intakePeriod, setIntakePeriod] = useState('May 2025 Intake');
   const [message, setMessage] = useState('');
+  const [validationError, setValidationError] = useState('');
 
   if (!isOpen || !course) return null;
 
+  const validateEmail = (email: string): boolean => {
+    if (!email) return true;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validatePhone = (phone: string): boolean => {
+    const cleaned = phone.replace(/[\s\-()]/g, '');
+    return /^\+?[\d]{10,15}$/.test(cleaned);
+  };
+
   const handleSubmitApplication = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!applicantName.trim() || !phone.trim()) return;
+    if (isSubmitting) return;
+    setValidationError('');
+
+    if (!applicantName.trim()) {
+      setValidationError('Full name is required.');
+      return;
+    }
+    if (!validatePhone(phone)) {
+      setValidationError('Please enter a valid phone number.');
+      return;
+    }
+    if (email && !validateEmail(email)) {
+      setValidationError('Please enter a valid email address.');
+      return;
+    }
+
+    setIsSubmitting(true);
 
     addApplication({
       applicantName: applicantName.trim(),
@@ -48,6 +76,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
     setTimeout(() => {
       setSubmitted(false);
       setShowApplicationForm(false);
+      setIsSubmitting(false);
+      setValidationError('');
       onClose();
       onApplyConfirm(course.title);
     }, 1800);
@@ -249,7 +279,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   />
                 </div>
 
-                <div className="pt-3 border-t border-slate-800 flex items-center justify-between">
+                <div className="pt-3 border-t border-slate-800 flex items-center justify-between gap-3">
+                  {validationError && (
+                    <p className="text-xs text-red-400 flex-1">{validationError}</p>
+                  )}
                   <button
                     type="button"
                     onClick={() => setShowApplicationForm(false)}
@@ -260,10 +293,23 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
                   <button
                     type="submit"
-                    className="px-6 py-2.5 rounded-xl text-xs font-bold bg-red-600 hover:bg-red-500 text-white flex items-center gap-2 shadow-lg transition-colors cursor-pointer"
+                    disabled={isSubmitting}
+                    className="px-6 py-2.5 rounded-xl text-xs font-bold bg-red-600 hover:bg-red-500 disabled:bg-slate-600 text-white flex items-center gap-2 shadow-lg transition-colors cursor-pointer disabled:cursor-not-allowed"
                   >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Submit Application</span>
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin h-3.5 w-3.5" viewBox="0 0 24 24" fill="none">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                        </svg>
+                        <span>Submitting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-3.5 h-3.5" />
+                        <span>Submit Application</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </form>

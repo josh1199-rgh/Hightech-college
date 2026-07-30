@@ -15,6 +15,7 @@ import {
   Maximize2
 } from 'lucide-react';
 import { motion, useInView } from 'motion/react';
+import { LazyImage } from './LazyImage';
 
 interface CampusLifeSectionProps {
   onApplyClick?: () => void;
@@ -279,11 +280,11 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
                       : 'h-44 sm:h-48'
                   } rounded-2xl overflow-hidden relative cursor-pointer group shadow-xs border border-slate-200/60`}
                 >
-                  <img
+                  <LazyImage
                     src={photo.image}
                     alt={photo.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                    referrerPolicy="no-referrer"
+                    fallback={DEFAULT_SITE_IMAGES.campusGallery1}
                   />
                   <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-slate-950/0 transition-colors" />
                   <div className="absolute top-3 right-3 p-2 rounded-full bg-slate-900/60 text-white opacity-0 group-hover:opacity-100 transition-opacity">
@@ -348,13 +349,13 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
             >
               <X className="w-5 h-5" />
             </button>
-            <div className="h-[420px] bg-slate-900">
-              <img
-                src={selectedPhoto.image}
-                alt={selectedPhoto.title}
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
+              <div className="h-[420px] bg-slate-900">
+                <LazyImage
+                  src={selectedPhoto.image}
+                  alt={selectedPhoto.title}
+                  className="w-full h-full object-cover"
+                  fallback={DEFAULT_SITE_IMAGES.campusGallery1}
+                />
             </div>
             <div className="p-6 bg-white space-y-1">
               <span className="text-xs font-bold text-red-600 uppercase tracking-wider">

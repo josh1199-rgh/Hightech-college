@@ -34,7 +34,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCourses, onApplyClick }) =>
   };
 
   const cmsHeroImage = settings.siteImages?.heroImage;
-  const heroImageSrc = cmsHeroImage && cmsHeroImage.trim() !== '' ? cmsHeroImage : '';
+  const heroImageSrc = (cmsHeroImage && cmsHeroImage.trim() !== '') ? cmsHeroImage : '/src/assets/images/site-heroImage.jpeg';
 
   return (
     <section

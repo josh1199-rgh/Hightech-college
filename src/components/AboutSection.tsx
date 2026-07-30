@@ -34,9 +34,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 }) => {
   const { settings } = useCMS();
 
-  const teamImage = settings.siteImages?.aboutTeamImage || '/src/assets/images/hightech_team_group_1785009095079.jpg';
-  const approachImage = settings.siteImages?.aboutApproachImage || '/src/assets/images/kitengela_campus_life_1785001497935.jpg';
-  const processImage = settings.siteImages?.aboutProcessImage || '/src/assets/images/hero_aerial_campus_1785000784118.jpg';
+  const teamImage = settings.siteImages?.aboutTeamImage || '/src/assets/images/site-aboutTeamImage.jpeg';
+  const approachImage = settings.siteImages?.aboutApproachImage || '/src/assets/images/site-aboutApproachImage.jpeg';
+  const processImage = settings.siteImages?.aboutProcessImage || '/src/assets/images/site-aboutProcessImage.jpeg';
 
   return (
     <section id="about" className="bg-white text-slate-800 font-inter py-16 sm:py-24 transition-colors overflow-hidden">

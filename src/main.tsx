@@ -2,6 +2,7 @@ import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
 import { CMSProvider } from './context/CMSContext.tsx';
+import { ErrorBoundary } from './components/ErrorBoundary.tsx';
 import './index.css';
 
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
@@ -19,8 +20,10 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <CMSProvider>
-      <App />
-    </CMSProvider>
+    <ErrorBoundary>
+      <CMSProvider>
+        <App />
+      </CMSProvider>
+    </ErrorBoundary>
   </StrictMode>,
 );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Phone,
   Clock,
@@ -40,9 +40,27 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
   const [subject, setSubject] = useState(initialProgram ? `Application Enquiry: ${initialProgram}` : '');
   const [messageText, setMessageText] = useState('');
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateEmail = (email: string): boolean => {
+    if (!email) return true;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validatePhone = (phone: string): boolean => {
+    const cleaned = phone.replace(/[\s\-()]/g, '');
+    return /^\+?[\d]{10,15}$/.test(cleaned);
+  };
+
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !phone.trim() || !messageText.trim()) return;
+    if (isSubmitting) return;
+    if (!name.trim()) return;
+    if (!validatePhone(phone)) return;
+    if (email && !validateEmail(email)) return;
+    if (!messageText.trim()) return;
+
+    setIsSubmitting(true);
 
     addMessage({
       name: name.trim(),
@@ -61,8 +79,47 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
       setPhone('');
       setSubject('');
       setMessageText('');
+      setIsSubmitting(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    return () => setIsSubmitting(false);
+  }, []);
+
+  useEffect(() => {
+    if (!isMessageModalOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsMessageModalOpen(false);
+      }
+      if (e.key === 'Tab') {
+        const focusableElements = document.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0] as HTMLElement;
+        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement?.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement?.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [isMessageModalOpen]);
+
   return (
     <section id="contact" className="py-16 sm:py-24 bg-[#F8F9FD] text-slate-900 font-inter relative overflow-hidden">
       
@@ -364,17 +421,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
                 transition={{ duration: 0.7 }}
                 className="rounded-xl overflow-hidden border border-slate-200 shadow-inner h-48 relative bg-slate-100"
               >
-                <iframe
-                  title="High-Tech College Kitengela Campus Map"
-                  src="https://maps.google.com/maps?q=-1.4810,36.9601&z=15&output=embed"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full h-full"
-                />
+                    <iframe
+                      title="High-Tech College Kitengela Campus Map"
+                      src="https://maps.google.com/maps?q=-1.4810,36.9601&z=15&output=embed"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      sandbox="allow-scripts allow-same-origin allow-popups"
+                      className="w-full h-full"
+                    />
 
                 {/* Custom Overlay Label on Map */}
                 <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-xs px-3 py-1.5 rounded-lg shadow-md border border-slate-200/80 flex items-center gap-2 pointer-events-none">
@@ -392,6 +450,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
 
             </motion.div>
 
+            <motion.button
+              onClick={() => setIsMessageModalOpen(true)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full py-4 rounded-2xl bg-[#0F172A] hover:bg-slate-800 text-white font-bold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-lg"
+            >
+              <MessageSquare className="w-4 h-4" />
+              <span>Send Us a Message</span>
+            </motion.button>
+
           </div>
 
         </div>
@@ -405,6 +473,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="contact-modal-title"
               className="relative w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl text-white"
             >
               <button
@@ -419,7 +490,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
                   <MessageSquare className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold font-playfair text-white">Send Message to Kitengela Campus</h3>
+                  <h3 id="contact-modal-title" className="text-xl font-bold font-playfair text-white">Send Message to Kitengela Campus</h3>
                   <p className="text-xs text-slate-400">Our admissions desk will reply to your phone or email</p>
                 </div>
               </div>
@@ -516,10 +587,23 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
                     </button>
                     <button
                       type="submit"
-                      className="px-6 py-2.5 rounded-xl text-xs font-bold bg-red-600 hover:bg-red-500 text-white flex items-center gap-2 shadow-lg transition-colors cursor-pointer"
+                      disabled={isSubmitting}
+                      className="px-6 py-2.5 rounded-xl text-xs font-bold bg-red-600 hover:bg-red-500 disabled:bg-slate-600 text-white flex items-center gap-2 shadow-lg transition-colors cursor-pointer disabled:cursor-not-allowed"
                     >
-                      <Send className="w-3.5 h-3.5" />
-                      <span>Send Enquiry</span>
+                      {isSubmitting ? (
+                        <>
+                          <svg className="animate-spin h-3.5 w-3.5" viewBox="0 0 24 24" fill="none">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                          </svg>
+                          <span>Sending...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-3.5 h-3.5" />
+                          <span>Send Enquiry</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </form>
