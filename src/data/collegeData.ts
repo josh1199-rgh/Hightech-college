@@ -1,25 +1,65 @@
 import { Course, FAQItem, Statistic, StudentLifeHighlight, StudentApplication, ContactMessage, CollegeSettings, SiteImages } from '../types';
 
+import siteHeroImage from '../assets/images/site-heroImage.jpeg';
+import siteAboutTeamImage from '../assets/images/site-aboutTeamImage.jpeg';
+import siteAboutApproachImage from '../assets/images/site-aboutApproachImage.jpeg';
+import siteAboutProcessImage from '../assets/images/site-aboutProcessImage.jpeg';
+import siteLogoUrl from '../assets/images/site-logoUrl.jpeg';
+import siteCampusFeature1 from '../assets/images/site-campusFeature1.jpeg';
+import siteCampusFeature2 from '../assets/images/site-campusFeature2.jpeg';
+import siteCampusFeature3 from '../assets/images/site-campusFeature3.jpeg';
+import siteCampusFeature4 from '../assets/images/site-campusFeature4.jpeg';
+import siteCampusFeature5 from '../assets/images/site-campusFeature5.jpeg';
+
+import courseJournalismMedia from '../assets/images/course-journalism-media.jpeg';
+import courseIct from '../assets/images/course-ict.jpeg';
+import courseHospitality from '../assets/images/course-hospitality.jpeg';
+import courseAccounts from '../assets/images/course-accounts.jpeg';
+import courseBusiness from '../assets/images/course-business.jpeg';
+import courseSecretarial from '../assets/images/course-secretarial.jpeg';
+import courseHealthSocial from '../assets/images/course-health-social.jpeg';
+import courseElectrical from '../assets/images/course-electrical.jpeg';
+import courseHairdressing from '../assets/images/course-hairdressing.jpeg';
+
+export {
+  siteHeroImage,
+  siteAboutTeamImage,
+  siteAboutApproachImage,
+  siteAboutProcessImage,
+  siteLogoUrl,
+  siteCampusFeature1,
+  siteCampusFeature2,
+  siteCampusFeature3,
+  siteCampusFeature4,
+  siteCampusFeature5,
+  courseJournalismMedia,
+  courseIct,
+  courseHospitality,
+  courseAccounts,
+  courseBusiness,
+  courseSecretarial,
+  courseHealthSocial,
+  courseElectrical,
+  courseHairdressing,
+};
+
 export const DEFAULT_SITE_IMAGES: SiteImages = {
-  heroImage: '/src/assets/images/site-heroImage.jpeg',
-  aboutTeamImage: '/src/assets/images/site-aboutTeamImage.jpeg',
-  aboutApproachImage: '/src/assets/images/site-aboutApproachImage.jpeg',
-  aboutProcessImage: '/src/assets/images/site-aboutProcessImage.jpeg',
-  logoUrl: '/src/assets/images/site-logoUrl.jpeg',
-  // Campus Life Feature Cards
-  campusFeature1: '/src/assets/images/site-campusFeature1.jpeg',
-  campusFeature2: '/src/assets/images/site-campusFeature2.jpeg',
-  campusFeature3: '/src/assets/images/site-campusFeature3.jpeg',
-  campusFeature4: '/src/assets/images/site-campusFeature4.jpeg',
-  campusFeature5: '/src/assets/images/site-campusFeature5.jpeg',
-  // Campus Moments & Gallery
-  campusGallery1: '/src/assets/images/site-campusFeature4.jpeg',
-  campusGallery2: '/src/assets/images/site-aboutProcessImage.jpeg',
-  campusGallery3: '/src/assets/images/site-aboutTeamImage.jpeg',
-  campusGallery4: '/src/assets/images/course-ict.jpeg',
-  campusGallery5: '/src/assets/images/site-campusFeature2.jpeg',
-  // Community Banner
-  campusCommunityBanner: '/src/assets/images/site-campusFeature2.jpeg',
+  heroImage: siteHeroImage,
+  aboutTeamImage: siteAboutTeamImage,
+  aboutApproachImage: siteAboutApproachImage,
+  aboutProcessImage: siteAboutProcessImage,
+  logoUrl: siteLogoUrl,
+  campusFeature1: siteCampusFeature1,
+  campusFeature2: siteCampusFeature2,
+  campusFeature3: siteCampusFeature3,
+  campusFeature4: siteCampusFeature4,
+  campusFeature5: siteCampusFeature5,
+  campusGallery1: siteCampusFeature4,
+  campusGallery2: siteAboutProcessImage,
+  campusGallery3: siteAboutTeamImage,
+  campusGallery4: courseIct,
+  campusGallery5: siteCampusFeature2,
+  campusCommunityBanner: siteCampusFeature2,
 };
 
 export const DEFAULT_SETTINGS: CollegeSettings = {
@@ -153,7 +193,7 @@ export const COURSES: Course[] = [
     tuition: 'KSh 16,500 / Term',
     rating: 4.9,
     featured: true,
-    image: '/src/assets/images/course-journalism-media.jpeg',
+    image: courseJournalismMedia,
     examBody: 'KNEC / TVETA',
     location: 'Kitengela Campus, Media Hub',
   },
@@ -170,7 +210,7 @@ export const COURSES: Course[] = [
     tuition: 'KSh 18,000 / Term',
     rating: 4.95,
     featured: true,
-    image: '/src/assets/images/course-ict.jpeg',
+    image: courseIct,
     examBody: 'KNEC / CDACC',
     location: 'Kitengela Campus, High-Tech Lab',
   },
@@ -187,7 +227,7 @@ export const COURSES: Course[] = [
     tuition: 'KSh 17,500 / Term',
     rating: 4.88,
     featured: true,
-    image: '/src/assets/images/course-hospitality.jpeg',
+    image: courseHospitality,
     examBody: 'KNEC / TVETA',
     location: 'Kitengela Campus, Hospitality Suite',
   },
@@ -204,7 +244,7 @@ export const COURSES: Course[] = [
     tuition: 'KSh 14,000 / Section',
     rating: 4.92,
     featured: true,
-    image: '/src/assets/images/course-accounts.jpeg',
+    image: courseAccounts,
     examBody: 'KASNEB Approved',
     location: 'Kitengela Campus, Business Center',
   },
@@ -221,7 +261,7 @@ export const COURSES: Course[] = [
     tuition: 'KSh 15,000 / Term',
     rating: 4.85,
     featured: false,
-    image: '/src/assets/images/course-business.jpeg',
+    image: courseBusiness,
     examBody: 'KNEC / CDACC',
     location: 'Kitengela Campus, Lecture Block A',
   },
@@ -238,7 +278,7 @@ export const COURSES: Course[] = [
     tuition: 'KSh 14,500 / Term',
     rating: 4.82,
     featured: false,
-    image: '/src/assets/images/course-secretarial.jpeg',
+    image: courseSecretarial,
     examBody: 'KNEC / NITA',
     location: 'Kitengela Campus, Admin Block',
   },
@@ -255,7 +295,7 @@ export const COURSES: Course[] = [
     tuition: 'KSh 16,000 / Term',
     rating: 4.89,
     featured: false,
-    image: '/src/assets/images/course-health-social.jpeg',
+    image: courseHealthSocial,
     examBody: 'KNEC / TVETA',
     location: 'Kitengela Campus, Health Dept',
   },
@@ -272,7 +312,7 @@ export const COURSES: Course[] = [
     tuition: 'KSh 18,500 / Term',
     rating: 4.91,
     featured: true,
-    image: '/src/assets/images/course-electrical.jpeg',
+    image: courseElectrical,
     examBody: 'KNEC / NITA',
     location: 'Kitengela Campus, Engineering Hub',
   },
@@ -289,7 +329,7 @@ export const COURSES: Course[] = [
     tuition: 'KSh 13,500 / Term',
     rating: 4.87,
     featured: false,
-    image: '/src/assets/images/course-hairdressing.jpeg',
+    image: courseHairdressing,
     examBody: 'NITA / TVETA',
     location: 'Kitengela Campus, Beauty Salon',
   },
@@ -351,7 +391,7 @@ export const STUDENT_LIFE_ITEMS: StudentLifeHighlight[] = [
     id: 'club-1',
     title: 'AI & Robotics Guild',
     category: 'Clubs',
-    image: '/src/assets/images/course-ict.jpeg',
+    image: courseIct,
     description: 'Build autonomous drones, competitive robotics, and neural network applications with state grant funding.',
     tag: 'Weekly Labs',
   },
@@ -359,7 +399,7 @@ export const STUDENT_LIFE_ITEMS: StudentLifeHighlight[] = [
     id: 'club-2',
     title: 'Annual 48-Hour Hackathon',
     category: 'Events',
-    image: '/src/assets/images/site-campusFeature2.jpeg',
+    image: siteCampusFeature2,
     description: 'Over $25,000 in cash prizes sponsored by tech giants. Over 400 student developers competing live.',
     tag: '$25K Prizes',
   },
@@ -367,7 +407,7 @@ export const STUDENT_LIFE_ITEMS: StudentLifeHighlight[] = [
     id: 'club-3',
     title: 'Next-Gen Esports & VR Lounge',
     category: 'Campus',
-    image: '/src/assets/images/site-campusFeature3.jpeg',
+    image: siteCampusFeature3,
     description: 'High-end gaming rigs, VR simulators, and varsity esports teams competing nationally.',
     tag: '24/7 Access',
   },
@@ -375,7 +415,7 @@ export const STUDENT_LIFE_ITEMS: StudentLifeHighlight[] = [
     id: 'club-4',
     title: 'Global Tech Exchange Program',
     category: 'Global',
-    image: '/src/assets/images/site-campusFeature4.jpeg',
+    image: siteCampusFeature4,
     description: 'Spend a semester at partner tech institutes in Tokyo, Berlin, or Silicon Valley with full credit transfer.',
     tag: 'International',
   },

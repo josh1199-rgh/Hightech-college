@@ -2,6 +2,10 @@ import React from 'react';
 import { ArrowRight, BookOpen, GraduationCap, Users, Layers } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useCMS } from '../context/CMSContext';
+import { DEFAULT_SITE_IMAGES } from '../data/collegeData';
+import siteAboutTeamImage from '../assets/images/site-aboutTeamImage.jpeg';
+import siteAboutApproachImage from '../assets/images/site-aboutApproachImage.jpeg';
+import siteAboutProcessImage from '../assets/images/site-aboutProcessImage.jpeg';
 
 interface AboutSectionProps {
   onApplyClick?: () => void;
@@ -34,9 +38,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 }) => {
   const { settings } = useCMS();
 
-  const teamImage = settings.siteImages?.aboutTeamImage || '/src/assets/images/site-aboutTeamImage.jpeg';
-  const approachImage = settings.siteImages?.aboutApproachImage || '/src/assets/images/site-aboutApproachImage.jpeg';
-  const processImage = settings.siteImages?.aboutProcessImage || '/src/assets/images/site-aboutProcessImage.jpeg';
+  const teamImage = settings.siteImages?.aboutTeamImage || siteAboutTeamImage;
+  const approachImage = settings.siteImages?.aboutApproachImage || siteAboutApproachImage;
+  const processImage = settings.siteImages?.aboutProcessImage || siteAboutProcessImage;
 
   return (
     <section id="about" className="bg-white text-slate-800 font-inter py-16 sm:py-24 transition-colors overflow-hidden">
