@@ -126,7 +126,7 @@ const getStoredItem = (keyV4: string, keyV3: string, keyV2?: string) => {
 
 // Helper to sanitize image URLs so legacy unsplash or empty image URLs default to local assets
 const sanitizeImageUrl = (url: string | undefined, fallback: string): string => {
-  if (!url || typeof url !== 'string' || url.includes('unsplash.com') || url.startsWith('/src/assets/images/')) {
+  if (!url || typeof url !== 'string' || url.includes('unsplash.com')) {
     return fallback;
   }
   return url;
