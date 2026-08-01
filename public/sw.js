@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hightech-college-v2';
+const CACHE_NAME = 'hightech-college-v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -49,20 +49,14 @@ self.addEventListener('fetch', (event) => {
   }
 
   event.respondWith(
-    caches.match(request).then((cached) => {
-      if (cached) {
-        const fetchPromise = fetch(request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            const cloned = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, cloned);
-            });
-          }
-          return networkResponse;
-        }).catch(() => cached);
-        return cached;
+    fetch(request).then((networkResponse) => {
+      if (networkResponse && networkResponse.status === 200) {
+        const cloned = networkResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(request, cloned);
+        });
       }
-      return fetch(request);
-    })
+      return networkResponse;
+    }).catch(() => caches.match(request))
   );
 });
