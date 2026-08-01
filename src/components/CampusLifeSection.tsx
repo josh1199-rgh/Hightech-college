@@ -346,26 +346,20 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
       {/* LIGHTBOX MODAL FOR GALLERY */}
       {selectedPhoto && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-200">
+          <div className="relative max-w-5xl w-full bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
             <button
               onClick={() => setSelectedPhoto(null)}
               className="absolute top-3 right-3 z-10 p-2 rounded-full bg-slate-900/80 text-white hover:bg-slate-900 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
-              <div className="h-[420px] bg-slate-900">
-                <LazyImage
-                  src={selectedPhoto.image}
-                  alt={selectedPhoto.title}
-                  className="w-full h-full object-cover"
-                  fallback={DEFAULT_SITE_IMAGES.campusGallery1}
-                />
-            </div>
-            <div className="p-6 bg-white space-y-1">
-              <span className="text-xs font-bold text-red-600 uppercase tracking-wider">
-                {selectedPhoto.category}
-              </span>
-              <h3 className="text-xl font-bold font-playfair text-[#0F172A]">{selectedPhoto.title}</h3>
+            <div className="h-[80vh] bg-slate-900">
+              <LazyImage
+                src={selectedPhoto.image}
+                alt={selectedPhoto.title}
+                className="w-full h-full object-contain"
+                fallback={DEFAULT_SITE_IMAGES.campusGallery1}
+              />
             </div>
           </div>
         </div>
