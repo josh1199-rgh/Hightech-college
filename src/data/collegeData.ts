@@ -10,6 +10,7 @@ import siteCampusFeature2 from '../assets/images/site-campusFeature2.jpeg';
 import siteCampusFeature3 from '../assets/images/site-campusFeature3.jpeg';
 import siteCampusFeature4 from '../assets/images/site-campusFeature4.jpeg';
 import siteCampusFeature5 from '../assets/images/site-campusFeature5.jpeg';
+import siteCampusCommunityBanner from '../assets/images/site-campusCommunityBanner.jpeg';
 import siteCampusGallery1 from '../assets/images/site-campusGallery1.jpeg';
 import siteCampusGallery2 from '../assets/images/site-campusGallery2.jpeg';
 import siteCampusGallery3 from '../assets/images/site-campusGallery3.jpeg';
@@ -37,6 +38,7 @@ export {
   siteCampusFeature3,
   siteCampusFeature4,
   siteCampusFeature5,
+  siteCampusCommunityBanner,
   siteCampusGallery1,
   siteCampusGallery2,
   siteCampusGallery3,
@@ -69,7 +71,7 @@ export const DEFAULT_SITE_IMAGES: SiteImages = {
   campusGallery3: siteCampusGallery3,
   campusGallery4: siteCampusGallery4,
   campusGallery5: siteCampusGallery5,
-  campusCommunityBanner: siteCampusFeature2,
+  campusCommunityBanner: siteCampusCommunityBanner,
 };
 
 export const DEFAULT_SETTINGS: CollegeSettings = {
