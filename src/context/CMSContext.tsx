@@ -124,13 +124,15 @@ const getStoredItem = (keyV4: string, keyV3: string, keyV2?: string) => {
   }
 };
 
-// Helper to sanitize image URLs so legacy unsplash, empty, or /src/assets paths default to local assets
+// Helper to sanitize image URLs so legacy unsplash, empty, /src/assets, or bare filenames default to local assets
 const sanitizeImageUrl = (url: string | undefined, fallback: string): string => {
   if (!url || typeof url !== 'string') return fallback;
   if (url.includes('unsplash.com')) return fallback;
   if (url.startsWith('/src/assets/')) return fallback;
   if (url.startsWith('src/assets/')) return fallback;
-  return url;
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+  if (url.startsWith('/assets/')) return url;
+  return fallback;
 };
 
 const sanitizeSiteImages = (stored: Partial<SiteImages> = {}): SiteImages => {
@@ -141,7 +143,14 @@ const sanitizeSiteImages = (stored: Partial<SiteImages> = {}): SiteImages => {
     if (value.includes('unsplash.com')) return;
     if (value.startsWith('/src/assets/')) return;
     if (value.startsWith('src/assets/')) return;
-    result[key] = value;
+    if (value.startsWith('http://') || value.startsWith('https://')) {
+      result[key] = value;
+      return;
+    }
+    if (value.startsWith('/assets/')) {
+      result[key] = value;
+      return;
+    }
   });
   return result;
 };

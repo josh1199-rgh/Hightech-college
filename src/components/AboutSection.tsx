@@ -230,7 +230,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <motion.div
               whileHover={{ y: -12, filter: 'drop-shadow(0 25px 50px -12px rgba(0, 0, 0, 0.15))' }}
-              transition={{ duration: 0.4, ease: cubicEase as [number, number, number, number] }}
+              transition={{ duration: 0.4, ease: cubicEase }}
               className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 group hover:border-red-500/60 hover:bg-white transition-colors cursor-pointer"
             >
               <div className="p-3 rounded-xl bg-[#0F172A] text-red-500 w-fit group-hover:rotate-6 transition-transform duration-300">
@@ -244,7 +244,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
             <motion.div
               whileHover={{ y: -12, filter: 'drop-shadow(0 25px 50px -12px rgba(0, 0, 0, 0.15))' }}
-              transition={{ duration: 0.4, ease: cubicEase as [number, number, number, number] }}
+              transition={{ duration: 0.4, ease: cubicEase }}
               className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 group hover:border-red-500/60 hover:bg-white transition-colors cursor-pointer"
             >
               <div className="p-3 rounded-xl bg-[#0F172A] text-red-500 w-fit group-hover:rotate-6 transition-transform duration-300">
@@ -258,7 +258,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
             <motion.div
               whileHover={{ y: -12, filter: 'drop-shadow(0 25px 50px -12px rgba(0, 0, 0, 0.15))' }}
-              transition={{ duration: 0.4, ease: cubicEase as [number, number, number, number] }}
+              transition={{ duration: 0.4, ease: cubicEase }}
               className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 group hover:border-red-500/60 hover:bg-white transition-colors cursor-pointer"
             >
               <div className="p-3 rounded-xl bg-[#0F172A] text-red-500 w-fit group-hover:rotate-6 transition-transform duration-300">
@@ -272,7 +272,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
             <motion.div
               whileHover={{ y: -12, filter: 'drop-shadow(0 25px 50px -12px rgba(0, 0, 0, 0.15))' }}
-              transition={{ duration: 0.4, ease: cubicEase as [number, number, number, number] }}
+              transition={{ duration: 0.4, ease: cubicEase }}
               className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 group hover:border-red-500/60 hover:bg-white transition-colors cursor-pointer"
             >
               <div className="p-3 rounded-xl bg-[#0F172A] text-red-500 w-fit group-hover:rotate-6 transition-transform duration-300">

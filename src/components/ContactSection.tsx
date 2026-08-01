@@ -27,7 +27,7 @@ const sectionVariant = {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.9, ease: cubicEase as [number, number, number, number] },
+    transition: { duration: 0.9, ease: cubicEase },
   },
 };
 

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useCMS } from '../context/CMSContext';
 import { DEFAULT_SITE_IMAGES } from '../data/collegeData';
 
-const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
+import { motion, useInView } from 'motion/react';
+import { LazyImage } from './LazyImage';
 import {
   Monitor,
   Utensils,
@@ -16,8 +17,8 @@ import {
   X,
   Maximize2
 } from 'lucide-react';
-import { motion, useInView } from 'motion/react';
-import { LazyImage } from './LazyImage';
+
+const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 interface CampusLifeSectionProps {
   onApplyClick?: () => void;
@@ -44,7 +45,7 @@ const sectionVariant = {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.9, ease: cubicEase as [number, number, number, number] },
+    transition: { duration: 0.9, ease: cubicEase },
   },
 };
 
@@ -266,8 +267,6 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
 
             {/* Right Side Photo Collage (Cascading stagger entry) */}
             <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
               {galleryPhotos.map((photo, i) => (
                 <motion.div
                   key={photo.id}
