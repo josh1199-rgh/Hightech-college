@@ -10,6 +10,11 @@ import siteCampusFeature2 from '../assets/images/site-campusFeature2.jpeg';
 import siteCampusFeature3 from '../assets/images/site-campusFeature3.jpeg';
 import siteCampusFeature4 from '../assets/images/site-campusFeature4.jpeg';
 import siteCampusFeature5 from '../assets/images/site-campusFeature5.jpeg';
+import siteCampusGallery1 from '../assets/images/site-campusGallery1.jpeg';
+import siteCampusGallery2 from '../assets/images/site-campusGallery2.jpeg';
+import siteCampusGallery3 from '../assets/images/site-campusGallery3.jpeg';
+import siteCampusGallery4 from '../assets/images/site-campusGallery4.jpeg';
+import siteCampusGallery5 from '../assets/images/site-campusGallery5.jpeg';
 
 import courseJournalismMedia from '../assets/images/course-journalism-media.jpeg';
 import courseIct from '../assets/images/course-ict.jpeg';
@@ -32,6 +37,11 @@ export {
   siteCampusFeature3,
   siteCampusFeature4,
   siteCampusFeature5,
+  siteCampusGallery1,
+  siteCampusGallery2,
+  siteCampusGallery3,
+  siteCampusGallery4,
+  siteCampusGallery5,
   courseJournalismMedia,
   courseIct,
   courseHospitality,
@@ -54,11 +64,11 @@ export const DEFAULT_SITE_IMAGES: SiteImages = {
   campusFeature3: siteCampusFeature3,
   campusFeature4: siteCampusFeature4,
   campusFeature5: siteCampusFeature5,
-  campusGallery1: siteCampusFeature4,
-  campusGallery2: siteAboutProcessImage,
-  campusGallery3: siteAboutTeamImage,
-  campusGallery4: courseIct,
-  campusGallery5: siteCampusFeature2,
+  campusGallery1: siteCampusGallery1,
+  campusGallery2: siteCampusGallery2,
+  campusGallery3: siteCampusGallery3,
+  campusGallery4: siteCampusGallery4,
+  campusGallery5: siteCampusGallery5,
   campusCommunityBanner: siteCampusFeature2,
 };
 
