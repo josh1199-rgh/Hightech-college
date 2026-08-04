@@ -23,7 +23,7 @@ export const StudentLifeSection: React.FC = () => {
         </div>
 
         {/* Student Life Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {campusLife.map((item) => (
             <div
               key={item.id}
@@ -34,6 +34,8 @@ export const StudentLifeSection: React.FC = () => {
                   src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                  decoding="async"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />

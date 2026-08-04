@@ -13,23 +13,25 @@ export const Footer: React.FC = () => {
 
 
   return (
-    <footer className="bg-slate-950 text-white border-t border-white/10 pt-16 pb-12 overflow-hidden">
+    <footer className="bg-slate-950 text-white border-t border-white/10 pt-12 sm:pt-16 pb-10 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: cubicEase }}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12"
+        className="max-w-7xl mx-auto px-4 sm:px-6"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-white/10">
           {/* Column 1: Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
               {settings.siteImages?.logoUrl ? (
                 <img
-                  src={settings.siteImages.logoUrl}
+                  src={settings.siteImages?.logoUrl}
                   alt="High-Tech College Logo"
                   className="h-10 w-auto object-contain max-w-[120px]"
+                  loading="lazy"
+                  decoding="async"
                   referrerPolicy="no-referrer"
                 />
               ) : null}

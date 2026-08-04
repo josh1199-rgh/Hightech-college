@@ -25,7 +25,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onContactClick }) => {
 
 
   return (
-    <section id="faq" className="bg-[#f1f1f3] text-slate-900 font-inter py-16 sm:py-24 px-4 sm:px-6 lg:px-12 w-full transition-colors overflow-hidden">
+    <section id="faq" className="bg-[#f1f1f3] text-slate-900 font-inter py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-12 w-full transition-colors overflow-hidden">
       <motion.div
         initial="hidden"
         whileInView="visible"

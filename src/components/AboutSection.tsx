@@ -45,8 +45,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
   const processImage = settings.siteImages?.aboutProcessImage || siteAboutProcessImage;
 
   return (
-    <section id="about" className="bg-white text-slate-800 font-inter py-16 sm:py-24 transition-colors overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+    <section id="about" className="bg-white text-slate-800 font-inter py-12 sm:py-16 md:py-24 transition-colors overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12 sm:space-y-16 md:space-y-24">
 
         {/* 1. HEADER TITLE SECTION */}
         <motion.div
@@ -93,7 +93,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariant}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-8"
+          className="grid grid-cols-1 gap-8 items-center pt-8"
         >
           <div className="lg:col-span-6 space-y-6">
             <h2 className="text-3xl sm:text-4xl font-playfair font-bold text-slate-900 tracking-tight">
@@ -121,6 +121,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 src={teamImage}
                 alt="High-Tech College Team and Staff"
                 className="w-full h-[380px] sm:h-[460px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
             </motion.div>
@@ -141,10 +143,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               variants={imageRevealVariant}
               className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200/80 group"
             >
-              <img
+<img
                 src={approachImage}
-                alt="High-Tech College Our Approach"
+                alt="High-Tech College Approach"
                 className="w-full h-[380px] sm:h-[460px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
             </motion.div>
@@ -200,10 +204,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               variants={imageRevealVariant}
               className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200/80 group"
             >
-              <img
+<img
                 src={processImage}
-                alt="High-Tech College Our Process"
+                alt="High-Tech College Process"
                 className="w-full h-[380px] sm:h-[460px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
             </motion.div>

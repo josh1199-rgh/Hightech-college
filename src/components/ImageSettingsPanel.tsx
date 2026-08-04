@@ -304,11 +304,13 @@ export const ImageSettingsPanel: React.FC<ImageSettingsPanelProps> = ({
                       </div>
                       <div className="w-full h-32 bg-slate-800 rounded-lg overflow-hidden border border-white/5 flex items-center justify-center">
                         {currentImage ? (
-                          <img
-                            src={currentImage}
-                            alt={slot.label}
-                            className="w-full h-full object-contain"
-                          />
+<img
+                              src={currentImage}
+                              alt={slot.label}
+                              className="w-full h-full object-contain"
+                              loading="lazy"
+                              decoding="async"
+                            />
                         ) : (
                           <div className="flex flex-col items-center gap-1 text-slate-600">
                             <ImageIcon className="w-6 h-6" />
@@ -425,6 +427,8 @@ const CourseImageSlot: React.FC<CourseImageSlotProps> = ({
             src={preview}
             alt={course.title}
             className="w-full h-full object-contain"
+            loading="lazy"
+            decoding="async"
           />
         ) : (
           <div className="flex flex-col items-center gap-1 text-slate-600">
