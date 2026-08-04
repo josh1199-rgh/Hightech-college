@@ -98,8 +98,6 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
                 src={preview}
                 alt="Preview"
                 className="max-h-48 mx-auto rounded-lg object-contain"
-                loading="lazy"
-                decoding="async"
               />
               <button
                 onClick={(e) => {

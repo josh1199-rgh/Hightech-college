@@ -124,7 +124,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
   }, [isMessageModalOpen]);
 
   return (
-    <section id="contact" className="py-12 sm:py-16 md:py-24 bg-[#F8F9FD] text-slate-900 font-inter relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-24 bg-[#F8F9FD] text-slate-900 font-inter relative overflow-hidden">
       
       {/* Background Subtle Wireframe Grid / Circles Pattern */}
       <div className="absolute top-10 left-10 w-96 h-96 pointer-events-none opacity-40">
@@ -151,7 +151,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
         variants={sectionVariant}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* ================= LEFT SIDE: Red Telephone Graphic & Header Info ================= */}
           <div className="lg:col-span-6 relative flex flex-col justify-center space-y-8 min-h-[320px] sm:min-h-[420px] lg:min-h-[520px]">
@@ -159,7 +159,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
             {/* Red Vintage Telephone Handset Illustration with Coiled Wire */}
             <div className="relative w-full max-w-lg mx-auto lg:mx-0 flex flex-col items-start">
               
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center w-full">
                 {/* 3D Stylized Red Phone Handset with Floating Cord Animation */}
                 <div className="sm:col-span-5 flex justify-center sm:justify-start">
                   <motion.div
@@ -564,7 +564,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
                 </div>
               ) : (
                 <form onSubmit={handleSendMessage} className="space-y-4 pt-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
                         Your Name *
@@ -594,7 +594,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialProgram }
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
                         Email Address

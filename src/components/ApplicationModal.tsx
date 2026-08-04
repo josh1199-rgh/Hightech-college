@@ -83,8 +83,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   };
 
   return (
-<div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-lg bg-slate-900 border border-white/20 rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl text-white max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl bg-slate-900 border border-white/20 rounded-3xl p-6 sm:p-8 shadow-2xl text-white max-h-[90vh] overflow-y-auto">
         {/* Close Button */}
         <button
           onClick={() => {

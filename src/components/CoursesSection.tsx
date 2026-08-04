@@ -64,7 +64,7 @@ export const CoursesSection: React.FC<CoursesSectionProps> = ({
   };
 
   return (
-    <section id="courses" className="relative bg-white text-slate-800 py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-7xl mx-auto overflow-hidden min-h-screen flex flex-col justify-between transition-colors">
+    <section id="courses" className="relative bg-white text-slate-800 py-20 px-4 sm:px-6 lg:px-12 overflow-hidden min-h-screen flex flex-col justify-between transition-colors">
       {/* Background Soft Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-10 left-10 w-72 h-72 bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -106,7 +106,7 @@ export const CoursesSection: React.FC<CoursesSectionProps> = ({
         </div>
 
         {/* 3D COVERFLOW CAROUSEL CONTAINER */}
-        <div className="relative py-6 sm:py-8 flex items-center justify-center min-h-[400px] sm:min-h-[500px] perspective-1000">
+        <div className="relative py-8 flex items-center justify-center min-h-[580px] perspective-1000">
           {/* Navigation Arrows */}
           <button
             onClick={handlePrev}
@@ -181,8 +181,6 @@ export const CoursesSection: React.FC<CoursesSectionProps> = ({
                       src={course.image}
                       alt={course.title}
                       className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-slate-950/70 text-red-300 text-[11px] font-bold backdrop-blur-md border border-red-500/30">

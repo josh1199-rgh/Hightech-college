@@ -43,7 +43,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCourses, onApplyClick }) =>
     <section
       ref={heroRef}
       id="home"
-      className="relative min-h-screen w-full flex flex-col justify-between pt-24 pb-10 px-4 sm:px-6 max-w-7xl mx-auto overflow-hidden bg-slate-950 text-white"
+      className="relative min-h-screen w-full flex flex-col justify-between pt-28 pb-12 px-4 sm:px-6 lg:px-12 overflow-hidden bg-slate-950 text-white"
     >
       {/* High-Tech College reception desk background image with parallax scale */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -64,56 +64,56 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCourses, onApplyClick }) =>
       </div>
 
       {/* Main Hero Content with Scroll Motion */}
-<motion.div
-         style={{ y: textY, opacity: textOpacity }}
-         className="relative z-10 max-w-7xl mx-auto w-full my-auto py-4 sm:py-8 grid grid-cols-1 gap-6 items-center"
-       >
-         {/* Left Column: Heading & Subtitle */}
-         <div className="flex flex-col items-center text-center space-y-4 sm:space-y-6">
-           {/* Main Heading styled matching display serif typography */}
-           <motion.h1
-             initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-             transition={{ duration: 0.9, ease: cubicEase }}
-             className="tracking-tight leading-[1.08] text-white drop-shadow-2xl"
-           >
-             <span className="block font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-slate-100 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
-               Shape Your Future at
-             </span>
-             <span className="block font-playfair italic font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-white to-red-300 mt-1 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
-               High-Tech College
-             </span>
-           </motion.h1>
+      <motion.div
+        style={{ y: textY, opacity: textOpacity }}
+        className="relative z-10 max-w-7xl mx-auto w-full my-auto py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+      >
+        {/* Left Column: Heading & Subtitle */}
+        <div className="lg:col-span-7 flex flex-col items-start space-y-6 lg:space-y-8">
+          {/* Main Heading styled matching display serif typography */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.9, ease: cubicEase }}
+            className="tracking-tight leading-[1.08] text-white drop-shadow-2xl"
+          >
+            <span className="block font-playfair text-4xl sm:text-6xl lg:text-7xl font-normal text-slate-100 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+              Shape Your Future at
+            </span>
+            <span className="block font-playfair italic font-extrabold text-5xl sm:text-7xl lg:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-white to-red-300 mt-1 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+              High-Tech College
+            </span>
+          </motion.h1>
 
-           {/* Subtitle */}
-           <motion.p
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.9, delay: 0.2, ease: cubicEase }}
-             className="text-base sm:text-lg md:text-xl text-slate-100 max-w-lg font-light leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
-           >
-             Professional Skills. Practical Training. Career Success.
-           </motion.p>
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: cubicEase }}
+            className="text-lg sm:text-2xl text-slate-100 max-w-2xl font-light leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
+          >
+            Professional Skills. Practical Training. Career Success.
+          </motion.p>
 
-           {/* CTA Buttons */}
-           <motion.div
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.9, delay: 0.35, ease: cubicEase }}
-             className="pt-2 flex flex-col sm:flex-row items-center gap-3 w-full"
-           >
-             <motion.button
-               whileHover={{ scale: 1.05, y: -2 }}
-               whileTap={{ scale: 0.96 }}
-               onClick={onExploreCourses}
-               className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-red-600 via-red-500 to-rose-600 text-white font-bold text-base sm:text-lg shadow-xl shadow-red-600/30 hover:shadow-red-600/50 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer"
-             >
-               <span>Explore Courses</span>
-               <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
-             </motion.button>
-           </motion.div>
-         </div>
-       </motion.div>
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.35, ease: cubicEase }}
+            className="pt-2 flex flex-wrap items-center gap-4 w-full sm:w-auto"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={onExploreCourses}
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-red-600 via-red-500 to-rose-600 text-white font-bold text-base sm:text-lg shadow-xl shadow-red-600/30 hover:shadow-red-600/50 transition-all duration-300 flex items-center justify-center gap-3 group cursor-pointer"
+            >
+              <span>Explore Courses</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
+            </motion.button>
+          </motion.div>
+        </div>
+      </motion.div>
 
       {/* Bottom Floating Bar */}
       <div className="relative z-10 max-w-7xl mx-auto w-full flex items-center justify-end pt-4">

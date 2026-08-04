@@ -178,7 +178,7 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
   ];
 
   return (
-    <section id="campus-life" className="bg-white text-slate-900 py-12 sm:py-16 md:py-24 px-4 sm:px-6 max-w-7xl mx-auto font-inter transition-colors overflow-hidden">
+    <section id="campus-life" className="bg-white text-slate-900 py-16 sm:py-24 px-4 sm:px-6 lg:px-12 font-inter transition-colors overflow-hidden">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -206,7 +206,7 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
         </div>
 
         {/* 2. FEATURE CARDS GRID WITH 3D TILT EFFECT */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {featureCards.map((card, idx) => (
             <motion.div
               key={card.id}
@@ -333,8 +333,6 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
                 src={siteImg.campusCommunityBanner || DEFAULT_SITE_IMAGES.campusCommunityBanner!}
                 alt="Students walking on Kitengela Campus pathway"
                 className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#0A1628] via-transparent to-transparent hidden lg:block" />

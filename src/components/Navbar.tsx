@@ -100,8 +100,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
                 src={settings.siteImages.logoUrl}
                 alt="High-Tech College Logo"
                 className="h-10 w-auto object-contain max-w-[120px]"
-                loading="lazy"
-                decoding="async"
                 referrerPolicy="no-referrer"
               />
             ) : null}
@@ -167,64 +165,47 @@ export const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
 
         {/* Mobile Drawer Navigation */}
         {mobileMenuOpen && (
-          <>
-            <div
-              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-              onClick={() => setMobileMenuOpen(false)}
-              aria-hidden="true"
-            />
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.3, ease: cubicEase }}
-              className="fixed top-0 left-0 bottom-0 w-[85vw] max-w-[360px] z-50 lg:hidden rounded-r-3xl bg-slate-950/98 backdrop-blur-2xl border-r border-red-500/20 p-6 shadow-2xl text-white flex flex-col overflow-y-auto"
-            >
-              <div className="flex items-center justify-between mb-6">
-                <span className="font-playfair italic font-bold text-lg text-white">Menu</span>
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+            transition={{ duration: 0.3, ease: cubicEase }}
+            className="lg:hidden mt-3 rounded-[24px] bg-slate-950/95 backdrop-blur-2xl border border-red-500/20 p-5 shadow-2xl text-white"
+          >
+            <div className="flex flex-col gap-2">
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.replace('#', '');
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`px-4 py-3 text-base font-medium rounded-2xl flex items-center justify-between transition-colors ${
+                      isActive
+                        ? 'bg-red-600/20 text-red-400 border border-red-500/30'
+                        : 'text-slate-200 hover:bg-white/10'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronRight className="w-4 h-4 opacity-60" />
+                  </a>
+                );
+              })}
+
+              <div className="pt-3 mt-2 border-t border-white/10 flex flex-col gap-2">
                 <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
-                  aria-label="Close menu"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onApplyClick();
+                  }}
+                  className="w-full py-3 rounded-2xl text-sm font-bold bg-red-600 text-white hover:bg-red-500 shadow-lg flex items-center justify-center gap-2"
                 >
-                  <X className="w-5 h-5" />
+                  <Sparkles className="w-4 h-4" />
+                  <span>Apply & Enroll</span>
                 </button>
               </div>
-              <div className="flex flex-col gap-2">
-                {navLinks.map((link) => {
-                  const isActive = activeSection === link.href.replace('#', '');
-                  return (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={(e) => handleNavClick(e, link.href)}
-                      className={`px-4 py-4 text-base font-medium rounded-2xl flex items-center justify-between transition-colors min-h-[44px] ${
-                        isActive
-                          ? 'bg-red-600/20 text-red-400 border border-red-500/30'
-                          : 'text-slate-200 hover:bg-white/10'
-                      }`}
-                    >
-                      <span>{link.name}</span>
-                      <ChevronRight className="w-4 h-4 opacity-60" />
-                    </a>
-                  );
-                })}
-
-                <div className="pt-4 mt-4 border-t border-white/10 flex flex-col gap-2">
-                  <button
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      onApplyClick();
-                    }}
-                    className="w-full py-4 rounded-2xl text-sm font-bold bg-red-600 text-white hover:bg-red-500 shadow-lg flex items-center justify-center gap-2 min-h-[44px]"
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    <span>Apply & Enroll</span>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </>
+            </div>
+          </motion.div>
         )}
       </header>
     </>
