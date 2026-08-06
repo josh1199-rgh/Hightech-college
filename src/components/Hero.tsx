@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { ArrowRight, ArrowDownRight } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useCMS } from '../context/CMSContext';
+import { DEFAULT_SITE_IMAGES } from '../data/collegeData';
+import siteHeroImage from '../assets/images/site-heroImage.jpeg';
 
 interface HeroProps {
   onExploreCourses: () => void;
@@ -10,6 +12,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onExploreCourses, onApplyClick }) => {
   const { settings } = useCMS();
+  const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
   const heroRef = useRef<HTMLDivElement>(null);
 
   // Hero Scroll Fill Transformation
@@ -34,7 +37,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCourses, onApplyClick }) =>
   };
 
   const cmsHeroImage = settings.siteImages?.heroImage;
-  const heroImageSrc = (cmsHeroImage && cmsHeroImage.trim() !== '') ? cmsHeroImage : '/src/assets/images/site-heroImage.jpeg';
+  const heroImageSrc = (cmsHeroImage && cmsHeroImage.trim() !== '') ? cmsHeroImage : siteHeroImage;
 
   return (
     <section
@@ -71,7 +74,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCourses, onApplyClick }) =>
           <motion.h1
             initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.9, ease: cubicEase }}
             className="tracking-tight leading-[1.08] text-white drop-shadow-2xl"
           >
             <span className="block font-playfair text-4xl sm:text-6xl lg:text-7xl font-normal text-slate-100 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
@@ -86,7 +89,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCourses, onApplyClick }) =>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.9, delay: 0.2, ease: cubicEase }}
             className="text-lg sm:text-2xl text-slate-100 max-w-2xl font-light leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
           >
             Professional Skills. Practical Training. Career Success.
@@ -96,7 +99,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCourses, onApplyClick }) =>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.9, delay: 0.35, ease: cubicEase }}
             className="pt-2 flex flex-wrap items-center gap-4 w-full sm:w-auto"
           >
             <motion.button

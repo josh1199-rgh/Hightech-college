@@ -17,6 +17,8 @@ import {
   ArrowRight
 } from 'lucide-react';
 
+const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 interface CoursesSectionProps {
   onSelectCourse: (course: Course) => void;
   onApplyForCourse: (courseName: string) => void;
@@ -28,7 +30,7 @@ const sectionVariant = {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.9, ease: cubicEase },
   },
 };
 

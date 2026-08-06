@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { useCMS } from '../context/CMSContext';
 
 export const Footer: React.FC = () => {
+  const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
   const { settings } = useCMS();
 
   const scrollToTop = () => {
@@ -17,7 +18,7 @@ export const Footer: React.FC = () => {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.8, ease: cubicEase }}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">

@@ -7,13 +7,15 @@ interface FAQSectionProps {
   onContactClick: () => void;
 }
 
+const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 const sectionVariant = {
   hidden: { opacity: 0, y: 80, filter: 'blur(12px)' },
   visible: {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.9, ease: cubicEase },
   },
 };
 
@@ -111,7 +113,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onContactClick }) => {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.4, ease: cubicEase }}
                       className="pl-10 sm:pl-12 pr-2 sm:pr-8 pt-3 space-y-2.5 text-slate-600 text-xs sm:text-sm leading-relaxed font-normal border-t border-slate-100 mt-4 overflow-hidden"
                     >
                       {Array.isArray(faq.answer) ? (

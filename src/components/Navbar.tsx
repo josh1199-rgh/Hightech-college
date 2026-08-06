@@ -3,6 +3,8 @@ import { Menu, X, ChevronRight, GraduationCap, Sparkles } from 'lucide-react';
 import { motion, useScroll, useSpring } from 'motion/react';
 import { useCMS } from '../context/CMSContext';
 
+const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 interface NavbarProps {
   onApplyClick: () => void;
 }
@@ -90,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
             animate={{ scale: isScrolled ? 0.92 : 1 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.4, ease: cubicEase }}
             className="flex items-center gap-2.5 group cursor-pointer select-none origin-left"
           >
             {settings.siteImages?.logoUrl ? (
@@ -167,7 +169,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
             initial={{ opacity: 0, y: -10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.98 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.3, ease: cubicEase }}
             className="lg:hidden mt-3 rounded-[24px] bg-slate-950/95 backdrop-blur-2xl border border-red-500/20 p-5 shadow-2xl text-white"
           >
             <div className="flex flex-col gap-2">

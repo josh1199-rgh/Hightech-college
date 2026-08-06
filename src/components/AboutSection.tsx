@@ -2,11 +2,17 @@ import React from 'react';
 import { ArrowRight, BookOpen, GraduationCap, Users, Layers } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useCMS } from '../context/CMSContext';
+import { DEFAULT_SITE_IMAGES } from '../data/collegeData';
+import siteAboutTeamImage from '../assets/images/site-aboutTeamImage.jpeg';
+import siteAboutApproachImage from '../assets/images/site-aboutApproachImage.jpeg';
+import siteAboutProcessImage from '../assets/images/site-aboutProcessImage.jpeg';
 
 interface AboutSectionProps {
   onApplyClick?: () => void;
   onExploreCourses?: () => void;
 }
+
+const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const sectionVariant = {
   hidden: { opacity: 0, y: 80, filter: 'blur(12px)' },
@@ -14,7 +20,7 @@ const sectionVariant = {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.9, ease: cubicEase },
   },
 };
 
@@ -24,7 +30,7 @@ const imageRevealVariant = {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.9, ease: cubicEase },
   },
 };
 
@@ -34,9 +40,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 }) => {
   const { settings } = useCMS();
 
-  const teamImage = settings.siteImages?.aboutTeamImage || '/src/assets/images/site-aboutTeamImage.jpeg';
-  const approachImage = settings.siteImages?.aboutApproachImage || '/src/assets/images/site-aboutApproachImage.jpeg';
-  const processImage = settings.siteImages?.aboutProcessImage || '/src/assets/images/site-aboutProcessImage.jpeg';
+  const teamImage = settings.siteImages?.aboutTeamImage || siteAboutTeamImage;
+  const approachImage = settings.siteImages?.aboutApproachImage || siteAboutApproachImage;
+  const processImage = settings.siteImages?.aboutProcessImage || siteAboutProcessImage;
 
   return (
     <section id="about" className="bg-white text-slate-800 font-inter py-16 sm:py-24 transition-colors overflow-hidden">
@@ -223,8 +229,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <motion.div
-              whileHover={{ y: -12, shadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15)' }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -12, filter: 'drop-shadow(0 25px 50px -12px rgba(0, 0, 0, 0.15))' }}
+              transition={{ duration: 0.4, ease: cubicEase }}
               className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 group hover:border-red-500/60 hover:bg-white transition-colors cursor-pointer"
             >
               <div className="p-3 rounded-xl bg-[#0F172A] text-red-500 w-fit group-hover:rotate-6 transition-transform duration-300">
@@ -237,8 +243,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             </motion.div>
 
             <motion.div
-              whileHover={{ y: -12, shadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15)' }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -12, filter: 'drop-shadow(0 25px 50px -12px rgba(0, 0, 0, 0.15))' }}
+              transition={{ duration: 0.4, ease: cubicEase }}
               className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 group hover:border-red-500/60 hover:bg-white transition-colors cursor-pointer"
             >
               <div className="p-3 rounded-xl bg-[#0F172A] text-red-500 w-fit group-hover:rotate-6 transition-transform duration-300">
@@ -251,8 +257,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             </motion.div>
 
             <motion.div
-              whileHover={{ y: -12, shadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15)' }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -12, filter: 'drop-shadow(0 25px 50px -12px rgba(0, 0, 0, 0.15))' }}
+              transition={{ duration: 0.4, ease: cubicEase }}
               className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 group hover:border-red-500/60 hover:bg-white transition-colors cursor-pointer"
             >
               <div className="p-3 rounded-xl bg-[#0F172A] text-red-500 w-fit group-hover:rotate-6 transition-transform duration-300">
@@ -265,8 +271,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             </motion.div>
 
             <motion.div
-              whileHover={{ y: -12, shadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15)' }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -12, filter: 'drop-shadow(0 25px 50px -12px rgba(0, 0, 0, 0.15))' }}
+              transition={{ duration: 0.4, ease: cubicEase }}
               className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 group hover:border-red-500/60 hover:bg-white transition-colors cursor-pointer"
             >
               <div className="p-3 rounded-xl bg-[#0F172A] text-red-500 w-fit group-hover:rotate-6 transition-transform duration-300">

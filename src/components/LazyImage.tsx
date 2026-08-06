@@ -9,7 +9,7 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 export const LazyImage: React.FC<LazyImageProps> = ({
   src,
   alt,
-  fallback = '/src/assets/images/site-placeholder.jpeg',
+  fallback = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23e2e8f0" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-family="sans-serif" font-size="14"%3EImage%3C/text%3E%3C/svg%3E',
   className = '',
   ...props
 }) => {
@@ -37,6 +37,16 @@ export const LazyImage: React.FC<LazyImageProps> = ({
     return () => observer.disconnect();
   }, [src]);
 
+  const handleError = () => {
+    setHasError(true);
+    if (imgRef.current && fallback && !fallback.startsWith('data:')) {
+      imgRef.current.src = fallback;
+    }
+    if (imgRef.current && fallback && fallback.startsWith('data:')) {
+      imgRef.current.src = fallback;
+    }
+  };
+
   return (
     <img
       ref={imgRef}
@@ -45,14 +55,9 @@ export const LazyImage: React.FC<LazyImageProps> = ({
       loading="lazy"
       decoding="async"
       onLoad={() => setIsLoaded(true)}
-      onError={() => {
-        setHasError(true);
-        if (imgRef.current && fallback) {
-          imgRef.current.src = fallback;
-        }
-      }}
+      onError={handleError}
       className={`transition-opacity duration-500 ${
-        isLoaded ? 'opacity-100' : 'opacity-0'
+        isLoaded && !hasError ? 'opacity-100' : 'opacity-0'
       } ${className}`}
       {...props}
     />

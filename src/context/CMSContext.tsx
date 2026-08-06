@@ -18,6 +18,8 @@ import {
   DEFAULT_SITE_IMAGES,
   INITIAL_APPLICATIONS,
   INITIAL_MESSAGES,
+  courseIct,
+  siteCampusFeature2,
 } from '../data/collegeData';
 
 interface CMSContextType {
@@ -122,19 +124,32 @@ const getStoredItem = (keyV4: string, keyV3: string, keyV2?: string) => {
   }
 };
 
-// Helper to sanitize image URLs so legacy unsplash or empty image URLs default to local assets
+// Helper to sanitize image URLs so legacy unsplash, empty, /src/assets, or bare filenames default to local assets
 const sanitizeImageUrl = (url: string | undefined, fallback: string): string => {
-  if (!url || typeof url !== 'string' || url.includes('unsplash.com')) {
-    return fallback;
-  }
-  return url;
+  if (!url || typeof url !== 'string') return fallback;
+  if (url.includes('unsplash.com')) return fallback;
+  if (url.startsWith('/src/assets/')) return fallback;
+  if (url.startsWith('src/assets/')) return fallback;
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+  if (url.startsWith('/assets/')) return url;
+  return fallback;
 };
 
 const sanitizeSiteImages = (stored: Partial<SiteImages> = {}): SiteImages => {
   const result = { ...DEFAULT_SITE_IMAGES };
   (Object.keys(DEFAULT_SITE_IMAGES) as Array<keyof SiteImages>).forEach((key) => {
-    if (stored[key] && !stored[key]?.includes('unsplash.com')) {
-      result[key] = stored[key]!;
+    const value = stored[key];
+    if (!value || typeof value !== 'string') return;
+    if (value.includes('unsplash.com')) return;
+    if (value.startsWith('/src/assets/')) return;
+    if (value.startsWith('src/assets/')) return;
+    if (value.startsWith('http://') || value.startsWith('https://')) {
+      result[key] = value;
+      return;
+    }
+    if (value.startsWith('/assets/')) {
+      result[key] = value;
+      return;
     }
   });
   return result;
@@ -159,8 +174,8 @@ export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (!saved) return COURSES;
       const parsed: Course[] = JSON.parse(saved);
       return parsed.map((c) => {
-        const defaultMatch = COURSES.find((dc) => dc.id === c.id);
-        const fallback = defaultMatch?.image || '/src/assets/images/tech_lab_course_1785000457542.jpg';
+      const defaultMatch = COURSES.find((dc) => dc.id === c.id);
+      const fallback = defaultMatch?.image || courseIct;
         return {
           ...c,
           image: sanitizeImageUrl(c.image, fallback),
@@ -186,8 +201,8 @@ export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (!saved) return STUDENT_LIFE_ITEMS;
       const parsed: StudentLifeHighlight[] = JSON.parse(saved);
       return parsed.map((item) => {
-        const defaultMatch = STUDENT_LIFE_ITEMS.find((d) => d.id === item.id);
-        const fallback = defaultMatch?.image || '/src/assets/images/kitengela_campus_life_1785001497935.jpg';
+      const defaultMatch = STUDENT_LIFE_ITEMS.find((d) => d.id === item.id);
+      const fallback = defaultMatch?.image || siteCampusFeature2;
         return {
           ...item,
           image: sanitizeImageUrl(item.image, fallback),

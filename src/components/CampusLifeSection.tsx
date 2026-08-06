@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useCMS } from '../context/CMSContext';
 import { DEFAULT_SITE_IMAGES } from '../data/collegeData';
+
+import { motion, useInView } from 'motion/react';
+import { LazyImage } from './LazyImage';
 import {
   Monitor,
   Utensils,
@@ -14,8 +17,8 @@ import {
   X,
   Maximize2
 } from 'lucide-react';
-import { motion, useInView } from 'motion/react';
-import { LazyImage } from './LazyImage';
+
+const cubicEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 interface CampusLifeSectionProps {
   onApplyClick?: () => void;
@@ -42,7 +45,7 @@ const sectionVariant = {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.9, ease: cubicEase },
   },
 };
 
@@ -211,7 +214,7 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              whileHover={{ y: -12, rotateX: -2, rotateY: 3, shadow: '0 25px 50px -12px rgba(0, 0, 0, 0.12)' }}
+              whileHover={{ y: -12, rotateX: -2, rotateY: 3, filter: 'drop-shadow(0 25px 50px -12px rgba(0, 0, 0, 0.12))' }}
               className="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl overflow-hidden shadow-sm transition-all duration-400 flex flex-col group cursor-pointer"
             >
               {/* Photo */}
@@ -219,6 +222,8 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
                 <img
                   src={card.image}
                   alt={card.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                   referrerPolicy="no-referrer"
                 />
@@ -262,7 +267,6 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
 
             {/* Right Side Photo Collage (Cascading stagger entry) */}
             <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              
               {galleryPhotos.map((photo, i) => (
                 <motion.div
                   key={photo.id}
@@ -342,26 +346,20 @@ export const CampusLifeSection: React.FC<CampusLifeSectionProps> = ({ onApplyCli
       {/* LIGHTBOX MODAL FOR GALLERY */}
       {selectedPhoto && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-200">
+          <div className="relative max-w-5xl w-full bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
             <button
               onClick={() => setSelectedPhoto(null)}
               className="absolute top-3 right-3 z-10 p-2 rounded-full bg-slate-900/80 text-white hover:bg-slate-900 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
-              <div className="h-[420px] bg-slate-900">
-                <LazyImage
-                  src={selectedPhoto.image}
-                  alt={selectedPhoto.title}
-                  className="w-full h-full object-cover"
-                  fallback={DEFAULT_SITE_IMAGES.campusGallery1}
-                />
-            </div>
-            <div className="p-6 bg-white space-y-1">
-              <span className="text-xs font-bold text-red-600 uppercase tracking-wider">
-                {selectedPhoto.category}
-              </span>
-              <h3 className="text-xl font-bold font-playfair text-[#0F172A]">{selectedPhoto.title}</h3>
+            <div className="h-[80vh] bg-slate-900">
+              <LazyImage
+                src={selectedPhoto.image}
+                alt={selectedPhoto.title}
+                className="w-full h-full object-contain"
+                fallback={DEFAULT_SITE_IMAGES.campusGallery1}
+              />
             </div>
           </div>
         </div>

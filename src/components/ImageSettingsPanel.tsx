@@ -4,6 +4,38 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useCMS } from '../context/CMSContext';
 import { SiteImages, Course } from '../types';
 import { ImageUploader } from './ImageUploader';
+import {
+  siteHeroImage,
+  siteAboutTeamImage,
+  siteAboutApproachImage,
+  siteAboutProcessImage,
+  siteLogoUrl,
+  siteCampusFeature1,
+  siteCampusFeature2,
+  siteCampusFeature3,
+  siteCampusFeature4,
+  siteCampusFeature5,
+  courseIct,
+} from '../data/collegeData';
+
+const imageDefaults: Record<keyof SiteImages, string> = {
+  heroImage: siteHeroImage,
+  aboutTeamImage: siteAboutTeamImage,
+  aboutApproachImage: siteAboutApproachImage,
+  aboutProcessImage: siteAboutProcessImage,
+  logoUrl: siteLogoUrl,
+  campusFeature1: siteCampusFeature1,
+  campusFeature2: siteCampusFeature2,
+  campusFeature3: siteCampusFeature3,
+  campusFeature4: siteCampusFeature4,
+  campusFeature5: siteCampusFeature5,
+  campusGallery1: siteCampusFeature4,
+  campusGallery2: siteAboutProcessImage,
+  campusGallery3: siteAboutTeamImage,
+  campusGallery4: courseIct,
+  campusGallery5: siteCampusFeature2,
+  campusCommunityBanner: siteCampusFeature2,
+};
 
 const downloadBase64 = (dataUrl: string, filename: string) => {
   const link = document.createElement('a');
@@ -88,25 +120,25 @@ export const ImageSettingsPanel: React.FC<ImageSettingsPanelProps> = ({
   };
 
   const generateExport = () => {
-    const siteImages = settings.siteImages || {};
+    const siteImages = (settings.siteImages || imageDefaults) as SiteImages;
     const exportLines = [
       `export const DEFAULT_SITE_IMAGES: SiteImages = {`,
-      `  heroImage: '${(siteImages.heroImage || '/src/assets/images/home-page-background.jpg').replace(/'/g, "\\'")}',`,
-      `  aboutTeamImage: '${(siteImages.aboutTeamImage || '/src/assets/images/hightech_team_group_1785009095079.jpg').replace(/'/g, "\\'")}',`,
-      `  aboutApproachImage: '${(siteImages.aboutApproachImage || '/src/assets/images/kitengela_campus_life_1785001497935.jpg').replace(/'/g, "\\'")}',`,
-      `  aboutProcessImage: '${(siteImages.aboutProcessImage || '/src/assets/images/hero_aerial_campus_1785000784118.jpg').replace(/'/g, "\\'")}',`,
+      `  heroImage: '${(siteImages.heroImage || imageDefaults.heroImage).replace(/'/g, "\\'")}',`,
+      `  aboutTeamImage: '${(siteImages.aboutTeamImage || imageDefaults.aboutTeamImage).replace(/'/g, "\\'")}',`,
+      `  aboutApproachImage: '${(siteImages.aboutApproachImage || imageDefaults.aboutApproachImage).replace(/'/g, "\\'")}',`,
+      `  aboutProcessImage: '${(siteImages.aboutProcessImage || imageDefaults.aboutProcessImage).replace(/'/g, "\\'")}',`,
       `  logoUrl: '${(siteImages.logoUrl || '').replace(/'/g, "\\'")}',`,
-      `  campusFeature1: '${(siteImages.campusFeature1 || '/src/assets/images/tech_lab_course_1785000457542.jpg').replace(/'/g, "\\'")}',`,
-      `  campusFeature2: '${(siteImages.campusFeature2 || '/src/assets/images/kitengela_campus_life_1785001497935.jpg').replace(/'/g, "\\'")}',`,
-      `  campusFeature3: '${(siteImages.campusFeature3 || '/src/assets/images/hero_campus_bg_1785000443858.jpg').replace(/'/g, "\\'")}',`,
-      `  campusFeature4: '${(siteImages.campusFeature4 || '/src/assets/images/hightech_team_group_1785009095079.jpg').replace(/'/g, "\\'")}',`,
-      `  campusFeature5: '${(siteImages.campusFeature5 || '/src/assets/images/tech_lab_course_1785000457542.jpg').replace(/'/g, "\\'")}',`,
-      `  campusGallery1: '${(siteImages.campusGallery1 || '/src/assets/images/hightech_team_group_1785009095079.jpg').replace(/'/g, "\\'")}',`,
-      `  campusGallery2: '${(siteImages.campusGallery2 || '/src/assets/images/hero_aerial_campus_1785000784118.jpg').replace(/'/g, "\\'")}',`,
-      `  campusGallery3: '${(siteImages.campusGallery3 || '/src/assets/images/college_reception_hero_1785008652637.jpg').replace(/'/g, "\\'")}',`,
-      `  campusGallery4: '${(siteImages.campusGallery4 || '/src/assets/images/tech_lab_course_1785000457542.jpg').replace(/'/g, "\\'")}',`,
-      `  campusGallery5: '${(siteImages.campusGallery5 || '/src/assets/images/kitengela_campus_life_1785001497935.jpg').replace(/'/g, "\\'")}',`,
-      `  campusCommunityBanner: '${(siteImages.campusCommunityBanner || '/src/assets/images/kitengela_campus_life_1785001497935.jpg').replace(/'/g, "\\'")}',`,
+      `  campusFeature1: '${(siteImages.campusFeature1 || imageDefaults.campusFeature1).replace(/'/g, "\\'")}',`,
+      `  campusFeature2: '${(siteImages.campusFeature2 || imageDefaults.campusFeature2).replace(/'/g, "\\'")}',`,
+      `  campusFeature3: '${(siteImages.campusFeature3 || imageDefaults.campusFeature3).replace(/'/g, "\\'")}',`,
+      `  campusFeature4: '${(siteImages.campusFeature4 || imageDefaults.campusFeature4).replace(/'/g, "\\'")}',`,
+      `  campusFeature5: '${(siteImages.campusFeature5 || imageDefaults.campusFeature5).replace(/'/g, "\\'")}',`,
+      `  campusGallery1: '${(siteImages.campusGallery1 || imageDefaults.campusGallery1).replace(/'/g, "\\'")}',`,
+      `  campusGallery2: '${(siteImages.campusGallery2 || imageDefaults.campusGallery2).replace(/'/g, "\\'")}',`,
+      `  campusGallery3: '${(siteImages.campusGallery3 || imageDefaults.campusGallery3).replace(/'/g, "\\'")}',`,
+      `  campusGallery4: '${(siteImages.campusGallery4 || imageDefaults.campusGallery4).replace(/'/g, "\\'")}',`,
+      `  campusGallery5: '${(siteImages.campusGallery5 || imageDefaults.campusGallery5).replace(/'/g, "\\'")}',`,
+      `  campusCommunityBanner: '${(siteImages.campusCommunityBanner || imageDefaults.campusCommunityBanner).replace(/'/g, "\\'")}',`,
       `};`,
       ``,
       `export const COURSES: Course[] = [`,
@@ -178,7 +210,7 @@ export const ImageSettingsPanel: React.FC<ImageSettingsPanelProps> = ({
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => {
-                    const siteImages = settings.siteImages || {};
+  const siteImages: SiteImages = settings.siteImages || imageDefaults;
                     Object.entries(siteImages).forEach(([key, value]) => {
                       if (value && typeof value === 'string' && value.startsWith('data:')) {
                         downloadBase64(value, `site-${key}.${getExtension(value)}`);
