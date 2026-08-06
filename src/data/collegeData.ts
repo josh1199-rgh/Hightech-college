@@ -4,7 +4,7 @@ import siteHeroImage from '../assets/images/site-heroImage.jpeg';
 import siteAboutTeamImage from '../assets/images/site-aboutTeamImage.jpeg';
 import siteAboutApproachImage from '../assets/images/site-aboutApproachImage.jpeg';
 import siteAboutProcessImage from '../assets/images/site-aboutProcessImage.jpeg';
-import siteLogoUrl from '../assets/images/site-logoUrl.jpeg';
+import siteLogoUrl from '../assets/images/8.jpeg';
 import siteCampusFeature1 from '../assets/images/site-campusFeature1.jpeg';
 import siteCampusFeature2 from '../assets/images/site-campusFeature2.jpeg';
 import siteCampusFeature3 from '../assets/images/site-campusFeature3.jpeg';
